@@ -8,6 +8,8 @@ import ru.one.stream.server.dto.MusicTrackDto;
 import ru.one.stream.server.dto.PlaylistDto;
 import ru.one.stream.server.service.PlaylistService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/library")
 @RequiredArgsConstructor
@@ -31,9 +33,17 @@ public class PlaylistController {
 
     @DeleteMapping
     public ResponseEntity<PlaylistDto> deletePosition(@RequestBody ItemDto musicTrackDto) {
-        System.out.println(musicTrackDto);
         var library = playlistService.deletePosition(USERNAME, musicTrackDto);
         return ResponseEntity.ok(library);
+    }
+
+    //todo Проверку пользователя добавить
+    @PutMapping("playlist/{playlistId}")
+    public ResponseEntity<PlaylistDto> reOrderPositions(@PathVariable Long playlistId,
+                                                        @RequestBody List<ItemDto> positions) {
+        playlistService.reOrderPositionsInPlaylistFromDto(playlistId, positions);
+       var playlist =  playlistService.getPlayList(playlistId);
+        return ResponseEntity.ok(playlist);
     }
 
 

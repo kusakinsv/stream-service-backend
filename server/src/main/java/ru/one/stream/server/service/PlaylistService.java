@@ -15,6 +15,7 @@ import ru.one.stream.server.repositories.PlaylistRepository;
 import ru.one.stream.server.repositories.UserRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,6 +29,14 @@ public class PlaylistService {
     public PlaylistDto getLibrary(String username) {
         return userRepository.findUserByUsername(username).get()
                 .getPlaylists().stream().filter(Playlist::getIsMain)
+                .findFirst()
+                .map(playlistMapper::toDto)
+                .orElseThrow();
+    }
+
+    public PlaylistDto getPlayList(Long playlistId, String username) {
+        return userRepository.findUserByUsername(username).orElseThrow()
+                .getPlaylists().stream().filter(p -> Objects.equals(p.getId(), playlistId))
                 .findFirst()
                 .map(playlistMapper::toDto)
                 .orElseThrow();
@@ -122,6 +131,27 @@ public class PlaylistService {
             pos.setPosition(i + 1);
         }
         playlistPositionRepository.saveAll(positions);
+    }
+
+    @Transactional
+    public void reOrderPositionsInPlaylistFromDto(Long playListId, List<ItemDto> positions) {
+        for (ItemDto position : positions) {
+            System.out.println(position.toString());
+        }
+        Map<String, PlaylistPosition> positionMap = playlistRepository.findById(playListId).get().getPlaylistPositions().stream()
+                .collect(Collectors.toMap(pos -> pos.getMusicTrack().getUrl(), p -> p));
+        for (ItemDto position : positions) {
+
+            PlaylistPosition playlistPosition = positionMap.get(position.getUrl());
+            if (position.getDuration() != null && position.getDuration() > 0) {
+                MusicTrack musicTrack = playlistPosition.getMusicTrack();
+                if (musicTrack.getDuration() == null) {
+                    musicTrack.setDuration(position.getDuration());
+                }
+            }
+            playlistPosition.setPosition(position.getPosition());
+        }
+        reOrderPositions(positionMap.values());
     }
 
     public PlaylistDto getPlayList(Long playlistId) {
