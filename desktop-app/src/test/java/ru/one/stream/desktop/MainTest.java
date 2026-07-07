@@ -6,7 +6,7 @@
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.TestMethodOrder;
 //import org.springframework.boot.test.context.SpringBootTest;
-//import ru.one.stream.commons.models.MusicTrackDto;
+//import ru.one.stream.server.dto.MusicTrackDto;
 //import ru.one.stream.client.service.SearchEnginesService;
 //import ru.one.stream.client.service.SearchService;
 //

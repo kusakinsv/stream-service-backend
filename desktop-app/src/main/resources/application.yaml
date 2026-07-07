@@ -1,6 +1,6 @@
 server:
   port: 7121
-  launch-browser-on-start: true
+  launch-browser-on-start: false
   startpage: http://localhost:7121/index
 
 spring:
@@ -8,3 +8,4 @@ spring:
     view:
       prefix: classpath:templates/
       suffix: .html
+

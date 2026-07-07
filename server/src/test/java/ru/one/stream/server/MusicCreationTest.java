@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.one.stream.server.entities.MusicTrack;
 import ru.one.stream.server.repositories.MusicTrackRepository;
-import ru.one.stream.server.service.ServerMusicService;
+import ru.one.stream.server.service.MusicTrackServiceOld;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ public class MusicCreationTest {
     MusicTrackRepository musicTrackRepository;
 
     @Autowired
-    ServerMusicService serverMusicService;
+    MusicTrackServiceOld serverMusicService;
 
 //    @Test
     public void testDelete(){

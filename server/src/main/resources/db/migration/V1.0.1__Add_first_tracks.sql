@@ -1,11 +1,11 @@
-INSERT INTO music_track (id,  track_name, url, creation_date)
+INSERT INTO music_track (id,  track_name, url, is_need_proxy)
 VALUES
-    (1, 'В. Цой - Группа крови', 'https://muzmas.ru/uploads/music/2023/30/kino-v-coj-gruppa-krovi-mp3.mp3', '00:00:00 18.03.2024'),
-    (2, 'Дурной Вкус - Пластинки', 'https://dnl2.drivemusic.me/dl/D6LbkIcIjm2lM0buLPT_vw/1710815764/download_music/2023/08/durnojj-vkus-plastinki.mp3', '00:00:00 18.03.2024'),
-    (3, 'В. Цой - Спокойная ночь', 'https://s.muzrecord.com/files/kino-spokoynaya-noch.mp3', '00:00:00 18.03.2024'),
-    (4, 'Сплин - Выхода нет', 'https://dnl1.drivemusic.me/dl/zpn_cj1mWs4DJ2BctTOykA/1713142632/download_music/2012/10/splin-vykhoda-net.mp3', '00:00:00 18.03.2024'),
-    (5, 'Би-2, Агата Кристи - А мы не ангелы, парень', 'https://s.muzrecord.com/mp3/2020-10-2/1601618222_agata_kristi_bi2_a_my_ne_angely_paren.mp3', '00:00:00 18.03.2024'),
-    (6, 'Би-2, Чичерина - Мой рокнролл', 'https://muzgen.net/uploads/music/2021/08/Bi_2_i_Chicherina_Moj_rok_n_rol.mp3', '00:00:00 18.03.2024');
+    (1, 'В. Цой - Группа крови', 'https://muzmas.ru/uploads/music/2023/30/kino-v-coj-gruppa-krovi-mp3.mp3', false),
+    (2, 'Дурной Вкус - Пластинки', 'https://dnl2.drivemusic.me/dl/D6LbkIcIjm2lM0buLPT_vw/1710815764/download_music/2023/08/durnojj-vkus-plastinki.mp3', false),
+    (3, 'В. Цой - Спокойная ночь', 'https://s.muzrecord.com/files/kino-spokoynaya-noch.mp3', false),
+    (4, 'Сплин - Выхода нет', 'https://dnl1.drivemusic.me/dl/zpn_cj1mWs4DJ2BctTOykA/1713142632/download_music/2012/10/splin-vykhoda-net.mp3', false),
+    (5, 'Би-2, Агата Кристи - А мы не ангелы, парень', 'https://s.muzrecord.com/mp3/2020-10-2/1601618222_agata_kristi_bi2_a_my_ne_angely_paren.mp3', false),
+    (6, 'Би-2, Чичерина - Мой рокнролл', 'https://muzgen.net/uploads/music/2021/08/Bi_2_i_Chicherina_Moj_rok_n_rol.mp3', false);
 
 INSERT INTO pattern (id, title)
 VALUES

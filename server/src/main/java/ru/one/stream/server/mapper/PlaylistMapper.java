@@ -1,29 +1,29 @@
 package ru.one.stream.server.mapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import ru.one.stream.commons.models.userspace.PlaylistDto;
-import ru.one.stream.commons.models.userspace.PositionDto;
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import ru.one.stream.server.dto.ItemDto;
+import ru.one.stream.server.dto.PlaylistDto;
 import ru.one.stream.server.entities.Playlist;
+import ru.one.stream.server.entities.PlaylistPosition;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Component
-public class PlaylistMapper {
+@Mapper(componentModel = "spring")
+public interface PlaylistMapper {
+        @Mapping(target = "positions", source = "playlistPositions")
+        PlaylistDto toDto(Playlist playlist);
 
-    @Autowired
-    PlaylistPositionMapper positionsMapper;
+        @AfterMapping
+        default void sortPositions(@MappingTarget List<ItemDto> positions) {
+                positions.sort(Comparator.comparing(ItemDto::getPosition));
+        }
 
-    public PlaylistDto toPlaylistDto(Playlist playlist){
-        PlaylistDto playlistDto = new PlaylistDto();
-        playlistDto.setId(playlist.getId());
-        playlistDto.setPlaylistTitle(playlist.getTitle());
-        playlistDto.setMain(playlist.isMain());
-        List<PositionDto> positions = playlist.getPlaylistPositions().stream().map(positionsMapper::toPositionDto)
-                .sorted(Comparator.comparingInt(PositionDto::getPosition)).collect(Collectors.toList());
-        playlistDto.setPositions(positions);
-        return playlistDto;
-    }
+        @Mapping(target = "duration", source = "playlistPosition.musicTrack.duration")
+        @Mapping(target = "url", source = "playlistPosition.musicTrack.url")
+        @Mapping(target = "isNeedProxy", source = "playlistPosition.musicTrack.isNeedProxy")
+        ItemDto toDto(PlaylistPosition playlistPosition);
 }

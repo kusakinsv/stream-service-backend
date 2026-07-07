@@ -1,5 +1,5 @@
 INSERT INTO users (id, username, email, password, role, user_status)
-VALUES (1, 'admin', 'admin@admin.aa', '$2a$12$uJhop/pfCtelLD3fp49Z0uOztLb0H7sWsu.gDjI.EFkWQkjm1898G', 'ADMIN', 'ACTIVE'),
+VALUES (1, 'admin', 'admin@admin.aa', '$2a$12$29mPsDjJfNj4lUAouXpFr.3/5AHNRcx.EJgwx8ewLpZwW8Qti4Z7y', 'ADMIN', 'ACTIVE'), --admin/admin
        (2, 'user', 'user@test.test', '$2a$12$vUZQKhn4Py.fKdg.JZ52O.KBf46x3Ogi8Pucq3VVopvNdQPVzo3J2', 'USER', 'ACTIVE');
 
 insert into playlist (id, title, user_id, is_main)

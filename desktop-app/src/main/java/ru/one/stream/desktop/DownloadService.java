@@ -1,6 +1,6 @@
 package ru.one.stream.desktop;
 
-import ru.one.stream.client.utils.TrackUtils;
+import ru.one.stream.server.utils.TrackUtils;
 
 import java.nio.file.Paths;
 

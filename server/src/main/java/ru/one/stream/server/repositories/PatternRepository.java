@@ -6,5 +6,6 @@ import ru.one.stream.server.entities.Pattern;
 import java.util.Optional;
 
 public interface PatternRepository extends JpaRepository<Pattern, Long> {
-    Optional<Pattern> findByTitle(String title);
+
+    Optional<Pattern> findByTitleLike(String title);
 }

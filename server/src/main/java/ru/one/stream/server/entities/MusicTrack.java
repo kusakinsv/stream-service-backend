@@ -1,18 +1,17 @@
 package ru.one.stream.server.entities;
 
 
+import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
+
+;
 
 @Data
 @Entity
@@ -25,8 +24,11 @@ public class MusicTrack {
     @SequenceGenerator(name = "music_track_id_seq",  sequenceName = "music_track_id_seq", initialValue = 50)
     private Long id;
 
-    @Column(name = "track_name")
-    private String trackName;
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "duration")
+    private Double duration;
 
     @Column(name = "url", unique = true)
     private String url;
@@ -40,15 +42,10 @@ public class MusicTrack {
     )
     private Set<Pattern> patterns = new HashSet<>();
 
-    private String creationDate;
+    @Column(name = "is_need_proxy", unique = true)
+    private Boolean isNeedProxy;
 
-    public LocalDateTime getCreationDate() {
-        return LocalDateTime.parse(creationDate, dtf);
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate.format(dtf);
-    }
+    private LocalDate creationDate;
 
     @Override
     public boolean equals(Object o) {
@@ -66,7 +63,7 @@ public class MusicTrack {
     @Override
     public String toString() {
         return String.format(
-                "MusicTrack (id=%s, trackName=%s, url=%s)", this.id, this.trackName, this.url);
+                "MusicTrack (id=%s, trackName=%s, url=%s)", this.id, this.title, this.url);
     }
 
     public MusicTrack() {

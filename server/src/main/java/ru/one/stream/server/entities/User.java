@@ -1,16 +1,14 @@
 package ru.one.stream.server.entities;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import ru.one.stream.server.enums.Role;
 import ru.one.stream.server.enums.UserStatus;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,18 +29,10 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @NotNull
-    private String password;
-
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<Playlist> playlist = new ArrayList<>(){{
-        add(new Playlist("My music", true));
-    }};
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private List<Playlist> playlists = new ArrayList<>();
 
     @Column(name = "user_status")
     @Enumerated(EnumType.STRING)

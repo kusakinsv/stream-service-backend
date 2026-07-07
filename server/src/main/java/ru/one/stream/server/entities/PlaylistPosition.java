@@ -1,10 +1,8 @@
 package ru.one.stream.server.entities;
 
 import lombok.Data;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
-import javax.persistence.*;
+import jakarta.persistence.*;;
 
 @Data
 @Entity
@@ -24,7 +22,7 @@ public class PlaylistPosition {
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "music_track_id")
-    private MusicTrack track;
+    private MusicTrack musicTrack;
 
     public PlaylistPosition() {
     }
