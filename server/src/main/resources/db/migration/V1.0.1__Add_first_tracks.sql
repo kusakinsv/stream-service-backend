@@ -1,4 +1,4 @@
-INSERT INTO music_track (id,  track_name, url, is_need_proxy)
+INSERT INTO music_track (id, title, url, is_need_proxy)
 VALUES
     (1, 'В. Цой - Группа крови', 'https://muzmas.ru/uploads/music/2023/30/kino-v-coj-gruppa-krovi-mp3.mp3', false),
     (2, 'Дурной Вкус - Пластинки', 'https://dnl2.drivemusic.me/dl/D6LbkIcIjm2lM0buLPT_vw/1710815764/download_music/2023/08/durnojj-vkus-plastinki.mp3', false),

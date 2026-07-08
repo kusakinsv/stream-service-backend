@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS playlist_position
 CREATE TABLE IF NOT EXISTS music_track
 (
     id      int8 primary key,
-    track_name VARCHAR(50) NOT NULL,
-    duration int8 default NULL,
+    title VARCHAR(50) NOT NULL,
+    duration numeric default NULL,
     url VARCHAR(700) UNIQUE NOT NULL,
     is_need_proxy boolean,
     creation_date date default current_date
