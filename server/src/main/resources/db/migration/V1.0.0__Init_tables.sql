@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS users
 CREATE TABLE IF NOT EXISTS playlist
 (
     id      int8 primary key,
-    title   VARCHAR(30) NOT NULL DEFAULT 'Playlist',
+    title   VARCHAR(70) NOT NULL DEFAULT 'Playlist',
     user_id int8 references users(id) on delete cascade,
     is_main boolean NOT NULL DEFAULT FALSE
 );
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS playlist_position
 (
     id      int8 primary key,
     position int4,
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(70) NOT NULL,
     music_track_id int8,
     playlist_id int8 references playlist (id),
     unique (playlist_id, position)
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS playlist_position
 CREATE TABLE IF NOT EXISTS music_track
 (
     id      int8 primary key,
-    title VARCHAR(50) NOT NULL,
+    title VARCHAR(70) NOT NULL,
     duration numeric default NULL,
     url VARCHAR(700) UNIQUE NOT NULL,
     is_need_proxy boolean,
@@ -44,7 +44,7 @@ ALTER TABLE playlist_position
 CREATE TABLE IF NOT EXISTS pattern
 (
     id      int8 primary key,
-    title VARCHAR(50) UNIQUE NOT NULL
+    title VARCHAR(70) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS music_track__pattern
