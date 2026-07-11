@@ -143,13 +143,14 @@ public class PlaylistService {
         for (ItemDto position : positions) {
 
             PlaylistPosition playlistPosition = positionMap.get(position.getUrl());
+            if (playlistPosition != null) {
             if (position.getDuration() != null && position.getDuration() > 0) {
                 MusicTrack musicTrack = playlistPosition.getMusicTrack();
                 if (musicTrack.getDuration() == null) {
                     musicTrack.setDuration(position.getDuration());
                 }
             }
-            playlistPosition.setPosition(position.getPosition());
+            playlistPosition.setPosition(position.getPosition());}
         }
         reOrderPositions(positionMap.values());
     }
