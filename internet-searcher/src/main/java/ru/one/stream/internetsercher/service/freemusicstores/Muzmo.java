@@ -12,6 +12,7 @@ import ru.one.stream.internetsercher.utils.Utils;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.security.SecureRandom;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,8 +22,17 @@ import java.util.Set;
  */
 @Component
 public class Muzmo implements MusicResource {
-//    public static final String URL = "https://su.muzmo.cc";
-    public static final String URL = "https://rmr.muzmo.cc";
+    private static final SecureRandom secureRandom = new SecureRandom();
+    private static final TrustManager[] trustAllCerts = new TrustManager[]{
+            new X509TrustManager() {
+                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+                public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+                public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {}
+            }
+    };
+    public static final String URL = "https://su.muzmo.cc";
     public static final String IP = "http://5.79.82.86";//не работает
     public static final String QUERY_URL = URL + "/search?q=";
     public static final String QUERY_IP = IP + "/search?q=";
@@ -31,7 +41,7 @@ public class Muzmo implements MusicResource {
     @Override
     public Set<SearchedMusicTrack> search(String trackName) {
         SSLContext sslContext = SSLContext.getInstance("TLS");
-        sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        sslContext.init(null, trustAllCerts, secureRandom);
         String query = QUERY_URL + Utils.toConvertedStringWithPlus(trackName);
         Document document = Jsoup.connect(query)
                 .followRedirects(true)
@@ -54,16 +64,4 @@ public class Muzmo implements MusicResource {
 
         return tracks;
     }
-
-    TrustManager[] trustAllCerts = new TrustManager[]{
-            new X509TrustManager() {
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-                public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {
-                }
-                public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {
-                }
-            }
-    };
 }
